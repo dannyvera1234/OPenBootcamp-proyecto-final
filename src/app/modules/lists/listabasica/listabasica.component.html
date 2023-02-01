@@ -1,0 +1,68 @@
+<p [ngStyle]="{color:'red', fontWeight:'bolder'}"> lista de elementos:</p>
+
+<p ngClass="underlined">aqui vamos a iterrar sobre una lista y mostrar varios elementos</p>
+
+
+
+<!-- BLOQUE DE DIRECTIVAS ESTRUCTURALES -->
+
+
+
+<button (click)="cambiarCargando()">
+    {{cargando? 'terminado carga':'iniciar carga'}}
+
+</button>
+
+<ng-container *ngIf="!cargando; else elseTemplate">
+    <p>!todo listo!</p>
+</ng-container>
+
+<ng-template #elseTemplate>
+    <p>cargando</p>
+    <p>espere a que carge...</p>
+</ng-template>
+
+
+<!-- BLOQUE PARA EXPLICAR EL USO DE NGFOR -->
+<!-- iteramos en la lista de productos -->
+<div *ngFor="let productos of listaelementos; let i = index; let even = even">
+    <!-- ambito de for donde tenemos acceso a "productos" -->
+
+    <p> ID: {{i+1}} {{productos.nombre}} -- {{productos.precio}}$</p>
+    <p> {{productos.descricion}} </p>
+</div>
+
+
+<!-- BLOQUE PARA ENTENDER NGSWITCH -->
+
+<div [ngSwitch]="opcion">
+    <p [id]="1" *ngSwitchCase="1">has escogido la opcion 1</p>
+    <p [id]="2" *ngSwitchCase="2">has escogido la opcion 2</p>
+    <p [id]="3" *ngSwitchCase="3">has escogido la opcion 3</p>
+    <p [id]="4" *ngSwitchCase="4">has escogido la opcion 4</p>
+
+    <p *ngSwitchDefault class="cerrar">Ninguna de las opciones en vlaida</p>
+
+</div>
+<!-- seleccion de opcion para el usuario -->
+<div>
+    <input type="radio" name="opcion" (click)="escogeropcion(1)">opcion 1
+    <input type="radio" name="opcion" (click)="escogeropcion(2)">opcion 2
+
+    <input type="radio" name="opcion" (click)="escogeropcion(3)">opcion 3
+    <input type="radio" name="opcion" (click)="escogeropcion(4)">opcion 4
+    <input type="radio" selected="selected" name="opcion" (click)="escogeropcion(0)">ocultar
+</div>
+
+
+<!-- podemos concatener directivas -->
+
+<div *ngFor="let productos of listaelementos; let i = index; let even = even">
+    <!-- ambito de for donde tenemos acceso a "productos" -->
+
+<div  *ngIf="productos.precio>10">
+    <p> ID: {{i+1}} {{productos.nombre}} -- {{productos.precio}}$</p>
+    <p> {{productos.descricion}} </p>
+</div>
+   
+</div>
